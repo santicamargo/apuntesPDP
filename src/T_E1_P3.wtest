@@ -1,0 +1,81 @@
+import rolando.*
+
+describe "Punto 3"{
+	
+	var espectroMalefico = new Logos("espectro malefico")
+	var rolando = new Guerrero(espectroMalefico,100, 999)
+	
+	var espadaDelDestino = new Arma(25, 2)
+	var mascaraOscura = new Mascara(30, 1)
+	var armadura = new Armadura(20, 3)
+	var collarDivino = new CollarDivino(50,1)
+		
+
+	var libroDeHechizos = new LibroDeHechizos(espectroMalefico)
+	var bendicion = new Bendicion()
+	var cotaDeMalla = new CotaDeMalla(1)
+	var hechizoArmadura = new HechizoArmadura(cotaDeMalla)
+
+	
+	
+fixture
+{
+	rolando.eliminarTodosLosArtefactos()
+	rolando.agregarArtefacto(espadaDelDestino)
+	rolando.agregarArtefacto(collarDivino)
+	rolando.agregarArtefacto(mascaraOscura)
+	rolando.agregarArtefacto(armadura)
+	armadura.refuerzo(ninguno)
+	rolando.agregarArtefacto(espejoFantastico)
+
+}
+	
+	test "Esta cargado"{
+		
+		assert.that(rolando.estaCargado())
+	}
+	
+	test "Sacarse la Armadura. Saber si esta cargado"{
+		rolando.eliminarArtefacto(armadura)
+		assert.notThat(rolando.estaCargado())
+	}
+	
+	test "cuanta habilidad tiene rolando"{
+		assert.equals(20, rolando.nivelDeLucha())
+	}
+	
+	test "nivel de lucha con bendicion como refuerzo"{
+		armadura.cambiarRefuerzo(bendicion)
+		assert.equals(58,armadura.lucha())
+	}
+	
+	test "nivel de lucha de armadura con conta de mallas"{
+		armadura.cambiarRefuerzo(cotaDeMalla)
+		assert.equals(3,armadura.lucha())
+	}
+
+	test "nivel de lucha de la armadura con hechizo basico de refuerzo"{
+		armadura.refuerzo(hechizoArmadura)
+		hechizoArmadura.hechizoSeleccionado(hechizoBasico)
+		assert.equals(12,armadura.lucha())
+	}
+	
+	test "nivel de lucha de la armadura con espectro malefico de refuerzo"{
+		armadura.refuerzo(hechizoArmadura)
+		hechizoArmadura.hechizoSeleccionado(espectroMalefico)
+		assert.equals(19,armadura.lucha())		
+	}
+	
+	test "eliminar todos los artefactos de rolando. Incorporar solo el espejo"{
+		rolando.eliminarTodosLosArtefactos()
+		rolando.agregarArtefacto(espejoFantastico)
+		assert.equals(1, rolando.nivelDeLucha())
+	}
+	
+	test "reemplazar hechizo preferido por libro de hechizos; Que contenga espectro malefico base y al hechizo basico. Saber nivel de hechiceria"{
+		rolando.hechizoPreferido(libroDeHechizos)
+		libroDeHechizos.agregarHechizo(hechizoBasico)
+		assert.equals(56,rolando.nivelDeHechiceria())
+	}
+
+}
