@@ -1,0 +1,96 @@
+import rolando.*
+
+describe "Punto 4"{
+	
+	var alacachula = new Logos("alacachula cachicomula")
+	var espectroMalefico = new Logos("espectro malefico")
+	
+	var thor = new Guerrero(hechizoBasico, 100, 200)
+	var xenia = new Guerrero(alacachula, 100, 200)
+	var loki = new Guerrero(hechizoBasico, 5, 200)
+	
+	var espada = new Arma(0, 310)
+	var armaduraSinRefuerzo = new Armadura(0, 310)
+
+	var armaduraReforzada = new Armadura (0, 310)
+	var cotaDeMalla1 = new CotaDeMalla(5)
+	var armaduraBendita = new Armadura(0, 310)
+	var bendicion1 = new Bendicion()
+	
+	var armaduraHechizada = new Armadura(0, 310)
+	var hechizoArmadura1 = new HechizoArmadura(alacachula)
+
+	var collarDivino = new CollarDivino(0, 310)
+	var libroDeHechizos = new LibroDeHechizos([hechizoBasico, alacachula])
+	
+	var mock = new Comerciante(new Independiente(0))
+
+	test "Conocer precio de lista de logo alacachula"{
+		assert.equals(22, alacachula.valor())
+	}
+	
+	test "Xenia canjea hechizo por hechizoBasico, cuantas monedas le quedan"{
+		xenia.comprarHechizo(hechizoBasico, mock)
+		assert.equals(100, xenia.oro())
+	} 
+	
+	test "Thor canjea hechizoBasico por alacachula, cuantas monedas le quedan"{
+		thor.comprarHechizo(alacachula, mock)
+		assert.equals(83, thor.oro())
+	}
+	
+	test "Thor canjea 2 veces el hechizoBasico"{
+		thor.comprarHechizo(hechizoBasico,mock)
+		thor.comprarHechizo(hechizoBasico,mock)
+		assert.equals(90, thor.oro())
+	}
+
+	test "Loki compra alacachula"{
+		assert.throwsException({loki.comprarHechizo(alacachula, mock)})
+	}
+	
+	test "Xenia compra una espada, collar divino, armadura sin refuerzo y armadura con cota de mallas, cuanto oro le queda"{
+		xenia.comprarArtefacto(espada, mock)
+		
+		xenia.comprarArtefacto(collarDivino, mock)
+		
+		xenia.comprarArtefacto(armaduraSinRefuerzo, mock)
+		
+		armaduraReforzada.cambiarRefuerzo(cotaDeMalla1)
+		xenia.comprarArtefacto(armaduraReforzada, mock)
+		
+		assert.equals(85.5, xenia.oro())	
+	}
+	
+	test "Xenia compra 4 artefactos"{
+		xenia.comprarArtefacto(espada, mock)
+		
+		xenia.comprarArtefacto(collarDivino, mock)
+		
+		xenia.comprarArtefacto(armaduraSinRefuerzo, mock)
+		
+		armaduraReforzada.cambiarRefuerzo(cotaDeMalla1)
+		xenia.comprarArtefacto(armaduraReforzada, mock)
+		
+		assert.equals(4, xenia.cantidadDeArtefactos())
+		}
+		
+	test "Thor compra armadura con bendicion de refuerzo y armadura hechizada con alacachula"{
+		armaduraBendita.cambiarRefuerzo(bendicion1)
+		thor.comprarArtefacto(armaduraBendita, mock)
+		
+		armaduraHechizada.cambiarRefuerzo(hechizoArmadura1)
+		thor.comprarArtefacto(armaduraHechizada, mock)
+		
+		assert.equals(74, thor.oro())
+	}
+	
+	test "Loki quiere comprar espejo"{
+		assert.throwsException({loki.comprarArtefacto(espejoFantastico, mock)})
+	}
+	
+	test "Xenia compra libro de hechizos"{
+		xenia.comprarHechizo(libroDeHechizos, mock)
+		assert.equals(58, xenia.oro())
+	}
+}

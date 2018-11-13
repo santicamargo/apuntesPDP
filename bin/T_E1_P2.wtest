@@ -1,0 +1,52 @@
+import rolando.*
+
+describe "Punto 2"{
+	var espectroMalefico = new Logos("espectro malefico")
+	
+	var rolando = new Guerrero(espectroMalefico,100, 999)
+	var espadaDelDestino = new Arma(50, 1)
+	var mascaraOscura = new Mascara(25,3)
+	var collarDivino = new CollarDivino(30,2)
+
+fixture
+{
+	
+	rolando.eliminarTodosLosArtefactos()
+	rolando.agregarArtefacto(espadaDelDestino)
+	rolando.agregarArtefacto(collarDivino)
+	rolando.agregarArtefacto(mascaraOscura)
+	
+}
+	
+	test "eliminar todos los artefactos"{
+		rolando.eliminarTodosLosArtefactos()
+		assert.equals(1,rolando.nivelDeLucha())
+	}
+	
+	test "habilidad de lucha de Rolando"{
+		assert.equals(13, rolando.nivelDeLucha())
+	}
+	
+	test "Cambiar perlas a 3"{
+		collarDivino.perlas(3)
+		assert.equals(11, rolando.nivelDeLucha())
+	}
+	
+	test "Cambiar valor base a 8"{
+		rolando.valorBaseLucha(8)
+		assert.equals(20, rolando.nivelDeLucha())		
+	}
+	
+	test "hacer eclispe, preguntar por valor de lucha de la mascara"{
+		mundo.eclipse()
+		assert.equals(5, mascaraOscura.lucha())
+	}
+	
+	test "eliminar mascara oscura"{
+		rolando.eliminarArtefacto(mascaraOscura)
+		assert.equals(9, rolando.nivelDeLucha())
+	}
+	
+}
+	
+	

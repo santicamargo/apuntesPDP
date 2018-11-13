@@ -1,0 +1,22 @@
+import rolando.*
+
+describe "Punto 1"{
+	 
+	 var hechizo1 = new HechizoComercial("el hechizo comercial")
+	 var espectroMalefico = new Logos("espectro malefico")
+
+     var foribunda = new Guerrero(hechizo1, 100, 200)
+     
+     test "Nivel de hechiceria de foribunda"{
+     	assert.equals(29, foribunda.nivelDeHechiceria())
+     }
+     
+     test "El hechizo comercial es poderoso?"{
+     	assert.notThat(hechizo1.esPoderoso())
+     	
+     }
+     
+     test "Espectro Malefico es poderoso?"{
+     	assert.that(espectroMalefico.esPoderoso())
+     }
+}

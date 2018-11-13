@@ -1,0 +1,69 @@
+import rolando.*
+
+
+describe "Punto 2"{
+
+	var espectroMalefico = new Logos("espectro malefico")
+	var rolando = new Guerrero(espectroMalefico, 100, 999)
+	
+	var espadaDelDestino = new Arma(30, 2)
+	var mascaraOscura = new Mascara(25, 1)
+	var mascaraOscura2 = new Mascara(50, 3)
+	
+	var collarDivino = new CollarDivino(70,2)
+	
+fixture
+{
+	
+	rolando.eliminarTodosLosArtefactos()
+	rolando.agregarArtefacto(espadaDelDestino)
+	rolando.agregarArtefacto(collarDivino)
+	rolando.agregarArtefacto(mascaraOscura)
+	mascaraOscura.oscuridad(1)
+	
+}
+
+	
+	test "eliminar todos los artefactos"{
+		rolando.eliminarTodosLosArtefactos()
+		assert.equals(1,rolando.nivelDeLucha())
+	}
+	
+	test "habilidad de lucha de Rolando"{
+		assert.equals(13, rolando.nivelDeLucha())
+	}
+	
+	test "Cambiar perlas a 3"{
+		collarDivino.perlas(3)
+		assert.equals(11, rolando.nivelDeLucha())
+	}
+	
+	test "Cambiar valor base a 8"{
+		rolando.valorBaseLucha(8)
+		assert.equals(20, rolando.nivelDeLucha())		
+	}
+	
+	test "hacer eclispe, preguntar por valor de lucha de la mascara"{
+		mundo.eclipse()
+		assert.equals(5, mascaraOscura.lucha())
+	}
+	
+	test "eliminar mascara oscura"{
+		rolando.eliminarArtefacto(mascaraOscura)
+		assert.equals(9, rolando.nivelDeLucha())
+	}
+	
+	test "nivel de lucha mascara con oscuridad 0"{
+		mascaraOscura2.oscuridad(0)
+		assert.equals(4,mascaraOscura2.lucha())
+	}
+	
+	test "nivel de lucha mascara con oscuridad 0 y minimo 2"{
+		mascaraOscura2.oscuridad(0)
+		mascaraOscura2.minimo(2)
+		assert.equals(2,mascaraOscura2.lucha())
+	}
+	
+}
+	
+	
