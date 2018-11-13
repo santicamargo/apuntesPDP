@@ -1,0 +1,45 @@
+import rolando.*
+
+describe "Parte 2 - Punto 1"{
+
+	var espectroMalefico = new Logos("espectro malefico")
+	var rolando = new Guerrero(espectroMalefico, 100, 999)
+
+
+fixture
+{
+	rolando.hechizoPreferido(espectroMalefico)
+
+}
+	test "Nivel de Hechiceria de Rolando" {
+		assert.equals(56,rolando.nivelDeHechiceria())
+	}
+
+	test "Cambiar nombre a EspectroMalefico a espectro superrecontramalefico muajajaj" {
+		espectroMalefico.nombre("espectro superrecontramalefico muajajaja")
+		assert.equals(125,rolando.nivelDeHechiceria())
+	}
+
+	test "Cambiar hechizo preferido"{
+		rolando.hechizoPreferido(hechizoBasico)
+		assert.equals(35,rolando.nivelDeHechiceria())
+	}
+	
+	test "Hacer que ocurra un eclipse"{
+		mundo.eclipse()
+		assert.equals(61,rolando.nivelDeHechiceria())
+	}
+	
+	test "EspectroMalefico es poderoso?"{
+		assert.that(espectroMalefico.esPoderoso())
+	}
+	
+	test "Cambiar nombre a espectro malefico a pepe. Saber si es poderoso"{
+		espectroMalefico.nombre("pepe")
+		assert.notThat(espectroMalefico.esPoderoso())
+	}
+	
+	test "Hechizo basico es poderoso"{
+		assert.notThat(hechizoBasico.esPoderoso())
+	}
+}

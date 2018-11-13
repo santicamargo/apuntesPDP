@@ -1,0 +1,40 @@
+import rolando.*
+
+describe "Punto 1"{
+	
+	var espectroMalefico = new Logos("espectro malefico")	
+	var rolando = new Guerrero(espectroMalefico,100, 999 )
+	
+	
+	test "Nivel de Hechiceria de Rolando" {
+		assert.equals(56,rolando.nivelDeHechiceria()) //compara si lo que esta en la izquierda es igual a lo de la derecha
+	}
+
+	test "Cambiar nombre a EspectroMalefico a espectro superrecontramalefico muajajaj" {
+		espectroMalefico.nombre("espectro superrecontramalefico muajajaja")
+		assert.equals(125,rolando.nivelDeHechiceria())
+	}
+
+	test "Cambiar hechizo preferido"{
+		rolando.hechizoPreferido(hechizoBasico)
+		assert.equals(35,rolando.nivelDeHechiceria())
+	}
+	
+	test "Hacer que ocurra un eclipse"{
+		mundo.eclipse()
+		assert.equals(61,rolando.nivelDeHechiceria())
+	}
+	
+	test "EspectroMalefico es poderoso?"{
+		assert.that(espectroMalefico.esPoderoso()) //dice si lo que esta entre parentesis es BOOl = TRUE
+	}
+	
+	test "Cambiar nombre a espectro malefico a pepe. Saber si es poderoso"{
+		espectroMalefico.nombre("pepe")
+		assert.notThat(espectroMalefico.esPoderoso()) //dice si lo que esta entre parentesis es BOOL = FALSE
+	}
+	
+	test "Hechizo basico es poderoso"{
+		assert.notThat(hechizoBasico.esPoderoso())
+	}
+}
