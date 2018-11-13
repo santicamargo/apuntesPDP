@@ -1,0 +1,29 @@
+import rolando.*
+
+describe "Punto 4"{
+
+	var pastoriza = new Comerciante(new Independiente(9))
+	var prieto = new Comerciante(registrado)
+	var fermepin = new Comerciante(impuestoALasGanancias)
+	var ursula = new Guerrero(hechizoBasico,100,200)
+	var mascaraOscura = new Mascara(25,3)
+	
+fixture{
+	impuestoALasGanancias.cambiarMni(5) // agregue este metodo en rolando.wlk
+}	
+
+test "Ursula compra mascara oscura" {
+
+	assert.equals(89.1,ursula.comprarArtefacto(mascaraOscura,pastoriza))
+
+}
+
+
+
+
+
+
+
+
+
+}

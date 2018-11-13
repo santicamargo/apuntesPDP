@@ -1,0 +1,35 @@
+import rolando.*
+
+describe "Punto 3"{
+	var navi = new Npc(hechizoBasico,200,100,"facil")
+	var ashleyGraham = new Npc(hechizoBasico,200,100,"moderado")
+	//var mascaraClara = new Mascara(45,7)
+	
+/*fixture{
+	ashleyGraham.agregarArtefacto(mascaraClara)
+	mascaraClara.oscuridad(0)
+}*/
+
+
+test "Conocer la habilidad de lucha de navi" {
+
+	assert.equals(1,navi.nivelDeLucha())
+
+}
+
+test "Conocer la habilidad de lucha de Ashley Graham" {
+	ashleyGraham.valorBaseLucha(5)
+	assert.equals(18,ashleyGraham.nivelDeLucha())
+
+}
+
+test "Conocer la habilidad de lucha de Ashley Graham luego de cambiar su nivel de dificultad a dificil" {
+	ashleyGraham.valorBaseLucha(5)
+	assert.equals(36,ashleyGraham.nivelDeLucha())
+
+}
+
+
+
+
+}
